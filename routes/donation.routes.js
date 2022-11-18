@@ -1,5 +1,5 @@
 import express from "express";
-import donation from '../models/Donation.js';
+import Donation from '../models/Donation.js';
 
 const donation = express.Router();
 

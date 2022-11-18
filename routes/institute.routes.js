@@ -1,13 +1,13 @@
 import express from "express";
 import Institute from '../models/Institute.js'
 
-const Institute = express.Router();
+const institute = express.Router();
 
-Institute.get('/', (req, res) => {
+institute.get('/', (req, res) => {
     res.send('Institute routes');
 });
 
-Institute.post("/register", async (req, res) => {
+institute.post("/register", async (req, res) => {
     
     const { name, type, cpnj, address } = req.body;
 
@@ -30,7 +30,7 @@ Institute.post("/register", async (req, res) => {
     if (savedInstitute) res.json({ message: "New Institute Registered!" });
 });
 
-Institute.get('/find', async (req, res) => {
+institute.get('/find', async (req, res) => {
     const Institutes = await Institute.findAll().catch(
         (err) => {
             console.log(err)
