@@ -2,23 +2,22 @@ import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'reac
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../context/authContext'
 import api from '../api'
-import Stars from 'react-native-stars';
 import { Entypo } from "@expo/vector-icons";
 
 const Users = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
 
-    const [reviews, setReviews] = useState({});
+    const [donations, setDonations] = useState({});
 
     useEffect(() => {
         const onScreenLoad = async () => {
-            const list = await api.get('/review/findByUser', {
+            const list = await api.get('/donation/findByInstitute', {
                 params: {
-                    idUser: state.idUser,
+                    idInstitute: state.idInstitute,
                   }
             });
             console.log(list);
-            setReviews(list.data.reviews)
+            setDonations(list.data.donations)
             dispatch({type: "update", payload: false})
         }
         onScreenLoad();
@@ -28,22 +27,13 @@ const Users = ({ navigation }) => {
     return (
         <View style={styles.view}>
             <FlatList
-                data={reviews}
+                data={donations}
                 renderItem={({ item }) => {
                     return (
                         <View style={styles.container}>
                             <View style={styles.text}>
-                                <Text style={styles.item}>{item.restaurant.name}</Text>
+                                <Text style={styles.item}>{item.institute.name}</Text>
                                 <Text style={styles.title}>{item.comment}</Text>
-                                <Stars
-                                    count={5}
-                                    display={item.stars}
-                                    half={false}
-                                    starSize={50}
-                                    fullStar={<Entypo name='star' style={[styles.myStarStyle]} />}
-                                    halfStar={<Entypo name='star' style={[styles.myStarStyle]} />}
-                                    emptyStar={<Entypo name='star-outlined' style={[styles.myEmptyStarStyle]} />}
-                                />
                             </View>
                         </View>
                     )
