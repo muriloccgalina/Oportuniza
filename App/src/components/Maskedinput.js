@@ -3,14 +3,15 @@ import React, {useState} from 'react';
 import InputMask from 'react-input-mask';
 
 
-const Maskedinput = ({ placeholder, mask, value, onChange }) => {
+const Maskedinput = ({ placeholder, mask, value, onChange}) => {
+  const handleInput = ({ target: { value } }) => onChange(value);
   return (
       <View style={styles.container}>
           <InputMask
             placeholder={placeholder} 
             mask={mask}
             value={value}
-            onChange={onChange}
+            onChange={handleInput}
             style={styles.input}
           /> 
       </View>

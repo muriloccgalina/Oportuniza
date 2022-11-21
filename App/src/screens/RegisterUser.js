@@ -51,6 +51,7 @@ const RegisterUser = ({ navigation }) => {
 
                 placeholder={"CPF"}
                 mask={"999.999.999-99"}
+                value={cpf}
                 onChange={setCpf}
             />
 

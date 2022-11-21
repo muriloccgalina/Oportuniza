@@ -3,30 +3,31 @@ import React, { useState, useContext } from 'react';
 import Logo from '../../assets/images/Logo.png';
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+import Maskedinput from "../components/Maskedinput";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api';
 import { Context } from '../context/authContext';
 
 const Login = ({ navigation }) => {
     const { dispatch } = useContext(Context);
-    const [email, setEmail] = useState('');
+    const [cpf, setCpf] = useState('');
     const [password, setPassword] = useState('');
 
     const onLoginPressed = async () => {
         try {
             const authData = await api.post('/login', {
-                email: email,
+                cpf: cpf,
                 password: password
             })
             if(authData.status === 200){
                 await AsyncStorage.setItem('token', authData.data.token)
                 dispatch({type:'logIn', payload: true})
             } else {
-                alert('Email ou Senha Inválidos')
+                alert('Invalid email or password')
                 setPassword('')
             }
         } catch (error) {
-            alert('Email ou Senha Inválidos')
+            alert('Invalid email or password')
             setPassword('')
         }
     }
@@ -41,17 +42,19 @@ const Login = ({ navigation }) => {
                 resizeMode="contain"
             />
 
-            <CustomInput
-                placeholder="Email"
-                value={email}
-                setValue={setEmail}
+            <Maskedinput 
+
+            placeholder={"CPF"}
+            mask={"999.999.999-99"}
+            value={cpf}
+            onChange={setCpf}
             />
 
             <CustomInput
                 placeholder="Password"
                 value={password}
                 setValue={setPassword}
-                secureTextEntry={false}
+                secureTextEntry={true}
             />
 
             <CustomButton text="Login" onPress={onLoginPressed} />
