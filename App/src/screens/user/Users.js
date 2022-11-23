@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import { Context } from '../context/authContext'
-import api from '../api'
+import { Context } from '../../context/authContext'
+import api from '../../api'
 import { Entypo } from "@expo/vector-icons";
-import CustomButton from '../components/CustomButton'
+import CustomButton from '../../components/CustomButton'
 
 const Users = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)

@@ -1,6 +1,6 @@
 import { StyleSheet, View, Image, useWindowDimensions } from "react-native";
 import React, { useState, useContext } from 'react';
-import Logo from '../../assets/images/Logo.png';
+import Logo from '../../../assets/images/Logo.png';
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import api from '../../api'
@@ -110,4 +110,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default RegisterInstitute
+export default RegisterInstitute;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Users from 'Users';
-import RegisterInstitute from 'RegisterInstitute';
+import Users from './Users';
+import RegisterInstitute from './RegisterInstitute';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,5 +14,5 @@ const UserRoutes = ({ navigation }) => {
     )
 }
 
-export default UserRoutes
+export default UserRoutes;
 
