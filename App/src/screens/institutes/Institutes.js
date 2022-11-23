@@ -32,11 +32,6 @@ const Institutes = ({ navigation }) => {
 
     return (
         <View style={styles.view}>
-            {state.isAdmin ? (
-                <CustomButton text="New Institute" onPress={() => navigation.navigate("RegisterInstitute")} />
-            ) : (
-                <></>
-            )}
             <FlatList
                 data={institutes}
                 renderItem={({ item }) => {

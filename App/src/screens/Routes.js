@@ -7,7 +7,7 @@ import { Context } from '../context/authContext'
 import Home from './Home'
 import InstituteRoutes from './institutes/InstituteRoutes'
 import DonationRoutes from './donation/DonationRoutes'
-import Users from './Users'
+import UserRoutes from './user/UserRoutes'
 
 const Tab = createBottomTabNavigator();
 
@@ -56,7 +56,7 @@ const Routes = () => {
             {state.isAdmin ? (
                 <Tab.Screen
                     name="User"
-                    component={Users}
+                    component={UserRoutes}
                     options={{
                         tabBarIcon: () => (
                             <Entypo name='user' size={30} />

@@ -1,12 +1,13 @@
 import { StyleSheet, TouchableOpacity, View, Image, useWindowDimensions, Text, TextInput } from "react-native";
 import React, { useState, useContext } from 'react';
-import Logo from '../../assets/images/Logo.png';
+import Logo from "../../assets/images/Logo.png"
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import Maskedinput from "../components/Maskedinput";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api';
 import { Context } from '../context/authContext';
+import iconSet from "@expo/vector-icons/build/Fontisto";
 
 const Login = ({ navigation }) => {
     const { dispatch } = useContext(Context);
@@ -41,7 +42,6 @@ const Login = ({ navigation }) => {
                 style={[styles.logo, { height: height * 0.3 }]}
                 resizeMode="contain"
             />
-
             <Maskedinput 
 
             placeholder={"CPF"}

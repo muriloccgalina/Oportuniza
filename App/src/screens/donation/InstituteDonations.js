@@ -13,7 +13,7 @@ const InstituteDonations = ({ navigation }) => {
 
     useEffect(() => {
         const onScreenLoad = async () => {
-            const list = await api.get('/donation/findByRestaurant', {
+            const list = await api.get('/donation/findByInstitute', {
                 params: {
                     idInstitute: state.idInstitute,
                 },
@@ -32,16 +32,7 @@ const InstituteDonations = ({ navigation }) => {
                         <View style={styles.container}>
                             <View style={styles.text}>
                                 <Text style={styles.title}>{item.comment}</Text>
-                                <Stars
-                                    count={5}
-                                    display={item.stars}
-                                    half={false}
-                                    starSize={50}
-                                    fullStar={<Entypo name='star' style={[styles.myStarStyle]} />}
-                                    halfStar={<Entypo name='star' style={[styles.myStarStyle]} />}
-                                    emptyStar={<Entypo name='star-outlined' style={[styles.myEmptyStarStyle]} />}
-                                />
-                                <Text style={styles.item}>Avaliado por: {item.user.name}</Text>
+                                <Text style={styles.item}>Donated by: {item.user.name}</Text>
                             </View>
                         </View>
                     )

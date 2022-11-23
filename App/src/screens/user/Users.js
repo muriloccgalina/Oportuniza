@@ -3,21 +3,22 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../context/authContext'
 import api from '../api'
 import { Entypo } from "@expo/vector-icons";
+import CustomButton from '../components/CustomButton'
 
 const Users = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
 
-    const [donations, setDonations] = useState({});
+    const [name, setName] = useState('');
 
     useEffect(() => {
         const onScreenLoad = async () => {
-            const list = await api.get('/donation/findByInstitute', {
+            const list = await api.get('/user/data', {
                 params: {
-                    idInstitute: state.idInstitute,
+                    idUser: state.idUser,
                   }
             });
             console.log(list);
-            setDonations(list.data.donations)
+            name(list.data.name)
             dispatch({type: "update", payload: false})
         }
         onScreenLoad();
@@ -26,21 +27,8 @@ const Users = ({ navigation }) => {
 
     return (
         <View style={styles.view}>
-            <FlatList
-                data={donations}
-                renderItem={({ item }) => {
-                    return (
-                        <View style={styles.container}>
-                            <View style={styles.text}>
-                                <Text style={styles.item}>{item.institute.name}</Text>
-                                <Text style={styles.title}>{item.comment}</Text>
-                            </View>
-                        </View>
-                    )
-                }
-                }
-                keyExtractor={(item) => item.id}
-            />
+                <CustomButton text="New Institute" onPress={() => navigation.navigate("RegisterInstitute")} />
+                <Text style={styles.item}>{name}</Text>
         </View>
 
 
