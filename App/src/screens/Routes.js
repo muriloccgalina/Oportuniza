@@ -5,9 +5,9 @@ import { Entypo } from '@expo/vector-icons'
 import { Context } from '../context/authContext'
 
 import Home from './Home'
-import InstituteRoutes from './institutes/InstituteRoutes'
 import DonationRoutes from './donation/DonationRoutes'
 import UserRoutes from './user/UserRoutes'
+import RegisterDonations from './donation/RegisterDonations'
 
 const Tab = createBottomTabNavigator();
 
@@ -35,8 +35,8 @@ const Routes = () => {
                 }}
             />
             <Tab.Screen
-                name="Institutes"
-                component={InstituteRoutes}
+                name="Doar"
+                component={RegisterDonations}
                 options={{
                     tabBarIcon:
                         () => (
@@ -45,7 +45,7 @@ const Routes = () => {
                 }}
             />
             <Tab.Screen
-                name="Donations"
+                name="Contributions"
                 component={DonationRoutes}
                 options={{
                     tabBarIcon: () => (

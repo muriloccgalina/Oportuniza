@@ -9,9 +9,9 @@ donation.get('/', (req, res) => {
 
 donation.post("/register", async (req, res) => {
 
-    const { idUser, idInstitute, comment, qtde, dateDonation } = req.body;
+    const { idUser, cpnj, item, qtde, dateDonation } = req.body;
 
-    const alreadyExistsdonation = await donation.findOne({ where: { idUser, idInstitute } }).catch(
+    const alreadyExistsdonation = await Donation.findOne({ where: { idUser, cpnj } }).catch(
         (err) => {
             console.log("Error: ", err);
         }
@@ -21,19 +21,19 @@ donation.post("/register", async (req, res) => {
         return res.status(409).json({ message: "donation already registered!" });
     }
 
-    const newdonation = new donation({ idUser, idInstitute, comment, qtde, dateDonation });
-    const saveddonation = await newdonation.save().catch((err) => {
+    const newDonation = new Donation({ idUser, cpnj, item, qtde, dateDonation });
+    const savedDonation = await newDonation.save().catch((err) => {
         console.log("Error: ", err);
         res.status(500).json({ error: "Sorry! Could not register the donation" });
     });
 
-    if (saveddonation) res.json({ message: "New donation Registered!" });
+    if (savedDonation) res.json({ message: "New donation Registered!" });
 });
 
 donation.get('/findByInstitute', async (req, res) => {
-    const idInstitute = req.body.idInstitute;
-    const donations = await donation.findAll(
-        {where: {idInstitute}}
+    const cpnj = req.body.cpnj;
+    const donations = await Donation.findAll(
+        {where: {cpnj}}
     ).catch(
         (err) => {
             console.log(err)
@@ -49,7 +49,7 @@ donation.get('/findByInstitute', async (req, res) => {
 
 donation.get('/findByUser', async (req, res) => {
     const idUser = req.body.idUser;
-    const donations = await donation.findAll(
+    const donations = await Donation.findAll(
         {where: {idUser}}
     ).catch(
         (err) => {

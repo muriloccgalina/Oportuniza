@@ -20,15 +20,15 @@ const Donation = connection.define(
                 key: 'id'
             }
         },
-        idInstitute: {
+        cpnj: {
             type: Sequelize.INTEGER,
             allowNull: false,
             references: {
                 model: 'institutes',
-                key: 'id'
+                key: 'cnpj'
             }
         },
-        comment: {
+        item: {
             type: Sequelize.STRING,
             allowNull: false
         },
@@ -44,7 +44,7 @@ const Donation = connection.define(
 );
 
 Donation.belongsTo(Institute, {
-    foreignKey: 'idInstitute'
+    foreignKey: 'cpnj'
   });
 Donation.belongsTo(User, {
     foreignKey: 'idUser'

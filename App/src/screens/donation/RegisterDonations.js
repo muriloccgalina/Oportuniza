@@ -7,14 +7,15 @@ import CustomButton from "../../components/CustomButton";
 import { Context } from "../../context/authContext";
 import Stars from 'react-native-stars';
 import { Entypo } from "@expo/vector-icons";
+import Maskedinput from "../../components/Maskedinput";
 
 const RegisterDonations = ({ navigation }) => {
 
     const { state, dispatch } = useContext(Context);
 
     const [idUser, setidUser] = useState(state.idUser);
-    const [idInstitute, setidInstitute] = useState(state.idInstitute);
-    const [comment, setComment] = useState('');
+    const [cnpj, setCnpj] = useState(state.cnpj);
+    const [item, setItem] = useState('');
     const [Qtde, setQtde] = useState('');
     const [dateDonation, setDateDonation] = useState('');
 
@@ -24,14 +25,14 @@ const RegisterDonations = ({ navigation }) => {
         try {
             const authData = await api.post("/donation/register", {
                 idUser: idUser,
-                idDonation: idDonation,
-                comment: comment,
+                cnpj: cnpj,
+                item: item,
                 qtde: Qtde,
                 dateDonation: dateDonation,
             });
             if (authData.status === 200) {
                 alert(authData.data.message)
-                setComment("")
+                setItem("")
                 setQtde("")
                 setDateDonation("")
                 dispatch({type: "update", payload: true})
@@ -53,22 +54,28 @@ const RegisterDonations = ({ navigation }) => {
                 resizeMode="contain"
             />
 
-            <CustomInput
-                value={state.name}
+            <Maskedinput 
+                placeholder={"CNPJ"}
+                mask={"99.999.999/9999-99"}
+                value={state.cnpj}
+                onChange={setCnpj}
                 editable={false}
+            />
+
+            <CustomInput
+                value={state.Item}
+                editable={false}
+                placeholder={"Item"}
             />
             <CustomInput
                 value={state.qtde}
                 editable={false}
+                placeholder={"Quantity"}
             />
             <CustomInput
                 value={state.dateDonation}
-                editable={true}
-            />
-            <CustomInput
-                placeholder="Comment"
-                value={comment}
-                setValue={setComment}
+                editable={false}
+                placeholder={"Date of Donation"}
             />
 
             <CustomButton text="Register" onPress={onRegisterPressed} />

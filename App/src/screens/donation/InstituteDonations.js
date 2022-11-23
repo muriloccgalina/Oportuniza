@@ -31,7 +31,8 @@ const InstituteDonations = ({ navigation }) => {
                     return (
                         <View style={styles.container}>
                             <View style={styles.text}>
-                                <Text style={styles.title}>{item.comment}</Text>
+                                <Text style={styles.title}>{item.item}</Text>
+                                <Text style={styles.title}>{item.qtde}</Text>
                                 <Text style={styles.item}>Donated by: {item.user.name}</Text>
                             </View>
                         </View>

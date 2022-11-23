@@ -10,6 +10,8 @@ const Donations = ({ navigation }) => {
 
     const [donations, setDonations] = useState({});
 
+    const ifNull = null;
+
     useEffect(() => {
         const onScreenLoad = async () => {
             const list = await api.get('/donation/findByUser', {
@@ -19,6 +21,7 @@ const Donations = ({ navigation }) => {
             });
             console.log(list);
             setDonations(list.data.donations)
+            ifNull(list)
             dispatch({type: "update", payload: false})
         }
         onScreenLoad();
@@ -27,30 +30,24 @@ const Donations = ({ navigation }) => {
 
     return (
         <View style={styles.view}>
-            <FlatList
-                data={donations}
-                renderItem={({ item }) => {
-                    return (
-                        <View style={styles.container}>
-                            <View style={styles.text}>
-                                <Text style={styles.item}>{item.institute.name}</Text>
-                                <Text style={styles.title}>{item.comment}</Text>
-                                <Stars
-                                    count={5}
-                                    display={item.stars}
-                                    half={false}
-                                    starSize={50}
-                                    fullStar={<Entypo name='star' style={[styles.myStarStyle]} />}
-                                    halfStar={<Entypo name='star' style={[styles.myStarStyle]} />}
-                                    emptyStar={<Entypo name='star-outlined' style={[styles.myEmptyStarStyle]} />}
-                                />
+            {ifNull == null
+             ? (<Text style={styles.empty}>You haven't contributed yet</Text>) :
+                <FlatList
+                    data={donations}
+                    renderItem={({ item }) => {
+                        return (
+                            <View style={styles.container}>
+                                <View style={styles.text}>
+                                    <Text style={styles.item}>{item.institute.name}</Text>
+                                    <Text style={styles.title}>{item.item}</Text>
+                                    <Text style={styles.title}>{item.qtde}</Text>
+                                </View>
                             </View>
-                        </View>
-                    )
-                }
-                }
+                        )
+                    }}    
                 keyExtractor={(item) => item.id}
-            />
+                />
+            }
         </View>
 
 
@@ -103,5 +100,9 @@ const styles = StyleSheet.create({
         color: 'gray',
         width: 50,
         fontSize: 50
+    },
+    empty: {
+        textAlign: 'center',
+        fontSize: 30
     }
 })
