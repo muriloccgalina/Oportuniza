@@ -18,7 +18,7 @@ const Users = ({ navigation }) => {
                   }
             });
             console.log(list);
-            name(list.data.name)
+            setName(list.data.UserData)
             dispatch({type: "update", payload: false})
         }
         onScreenLoad();
@@ -28,7 +28,7 @@ const Users = ({ navigation }) => {
     return (
         <View style={styles.view}>
                 <CustomButton text="New Institute" onPress={() => navigation.navigate("RegisterInstitute")} />
-                <Text style={styles.item}>{name}</Text>
+                {/* <Text style={styles.item}>{name}</Text> */}
         </View>
 
 

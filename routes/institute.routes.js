@@ -8,9 +8,8 @@ institute.get('/', (req, res) => {
 });
 
 institute.post("/register", async (req, res) => {
-    
+    console.log("chegou")
     const { name, type, cpnj, address } = req.body;
-
     const alreadyExistsInstitute = await Institute.findOne({ where: { name } }).catch(
         (err) => {
             console.log("Error: ", err);

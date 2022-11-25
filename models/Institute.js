@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import connection from '../config/db.js';
 
 const Institute = connection.define(
-    'institute',
+    'institutes',
     {
         id: {
             type: Sequelize.INTEGER,

@@ -11,7 +11,6 @@ user.get('/', (req, res) => {
 
 user.post('/register', async (req, res) => {
     const { name, cpf, password, admin } = req.body;
-
     const alreadyExistsUser = await User.findOne(
         { where: { cpf } }
     ).catch((err) => console.log("Error: ", err));
@@ -38,9 +37,9 @@ user.post('/register', async (req, res) => {
 });
 
 user.get('/data', async (req, res) => {
-    const idUser = req.body.idUser;
-    const UserData = await user.findAll(
-        {where: {idUser}}
+    const id = req.query.idUser;
+    const UserData = await User.findAll(
+        {where: {id: id}}
     ).catch(
         (err) => {
             console.log(err)

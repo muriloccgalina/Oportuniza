@@ -1,7 +1,7 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Users from './Users';
-import RegisterInstitute from './RegisterInstitute';
+import RegisterInstitute from '../institutes/RegisterInstitute';
 
 const Stack = createNativeStackNavigator();
 

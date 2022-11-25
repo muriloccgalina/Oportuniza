@@ -14,9 +14,9 @@ const RegisterDonations = ({ navigation }) => {
     const { state, dispatch } = useContext(Context);
 
     const [idUser, setidUser] = useState(state.idUser);
-    const [cnpj, setCnpj] = useState(state.cnpj);
+    const [idInstitute, setIdInstitute] = useState(state.idInstitute);
     const [item, setItem] = useState('');
-    const [Qtde, setQtde] = useState('');
+    const [qtde, setQtde] = useState('');
     const [dateDonation, setDateDonation] = useState('');
 
     const { height } = useWindowDimensions();
@@ -25,9 +25,9 @@ const RegisterDonations = ({ navigation }) => {
         try {
             const authData = await api.post("/donation/register", {
                 idUser: idUser,
-                cnpj: cnpj,
+                idInstitute: idInstitute,
                 item: item,
-                qtde: Qtde,
+                qtde: qtde,
                 dateDonation: dateDonation,
             });
             if (authData.status === 200) {
@@ -54,28 +54,25 @@ const RegisterDonations = ({ navigation }) => {
                 resizeMode="contain"
             />
 
-            <Maskedinput 
-                placeholder={"CNPJ"}
-                mask={"99.999.999/9999-99"}
-                value={state.cnpj}
-                onChange={setCnpj}
+            <CustomInput 
+                value={state.nameInstitute}
+                editable={false}
+            />
+
+            <CustomInput 
+                value={state.name}
                 editable={false}
             />
 
             <CustomInput
-                value={state.Item}
-                editable={false}
+                value={item}
+                onChange={setItem}
                 placeholder={"Item"}
             />
             <CustomInput
-                value={state.qtde}
-                editable={false}
+                value={qtde}
+                onChange={setQtde}
                 placeholder={"Quantity"}
-            />
-            <CustomInput
-                value={state.dateDonation}
-                editable={false}
-                placeholder={"Date of Donation"}
             />
 
             <CustomButton text="Register" onPress={onRegisterPressed} />

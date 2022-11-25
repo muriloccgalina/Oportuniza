@@ -4,7 +4,7 @@ import Institute from './Institute.js';
 import User from '../models/User.js';
 
 const Donation = connection.define(
-    'donation',
+    'donations',
     {
         id: {
             type: Sequelize.INTEGER,
@@ -20,13 +20,13 @@ const Donation = connection.define(
                 key: 'id'
             }
         },
-        cpnj: {
+        cnpj: {
             type: Sequelize.INTEGER,
             allowNull: false,
-            references: {
-                model: 'institutes',
-                key: 'cnpj'
-            }
+            // references: {
+            //     model: 'institutes',
+            //     key: 'cnpj'
+            // }
         },
         item: {
             type: Sequelize.STRING,
@@ -36,16 +36,12 @@ const Donation = connection.define(
             type: Sequelize.INTEGER,
             allowNull: false
         },
-        dateDonation: {
-            type: Sequelize.DATE,
-            allowNull: false,
-        }
     }
 );
 
-Donation.belongsTo(Institute, {
-    foreignKey: 'cpnj'
-  });
+// Donation.belongsTo(Institute, {
+//     foreignKey: 'cnpj'
+//   });
 Donation.belongsTo(User, {
     foreignKey: 'idUser'
   });
