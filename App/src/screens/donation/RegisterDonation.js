@@ -14,8 +14,8 @@ const RegisterDonation = ({ navigation }) => {
 
     const [idUser, setidUser] = useState(state.idUser);
     const [idInstitute, setidInstitute] = useState(state.idInstitute);
-    const [comment, setComment] = useState('');
-    const [stars, setStars] = useState('');
+    const [itens, setItens] = useState('');
+    const [qtde, setQtde] = useState('');
 
     const { height } = useWindowDimensions();
 
@@ -24,13 +24,13 @@ const RegisterDonation = ({ navigation }) => {
             const authData = await api.post("/donation/register", {
                 idUser: idUser,
                 idInstitute: idInstitute,
-                comment: comment,
-                stars: stars,
+                itens: itens,
+                qtde: qtde,
             });
             if (authData.status === 200) {
                 alert(authData.data.message)
-                setComment("")
-                setStars("")
+                setItens("")
+                setQtde("")
                 dispatch({type: "update", payload: true})
             }
             else {
@@ -61,20 +61,14 @@ const RegisterDonation = ({ navigation }) => {
             />
 
             <CustomInput
-                placeholder="Comment"
-                value={comment}
-                setValue={setComment}
+                placeholder="Itens"
+                value={itens}
+                setValue={setItens}
             />
-
-            <Stars
-                default={0}
-                update={(val)=>{setStars(val)}}
-                count={5}
-                half={false}
-                starSize={50}
-                fullStar={<Entypo name='star' style={[styles.myStarStyle]} />}
-                halfStar={<Entypo name='star' style={[styles.myStarStyle]} />}
-                emptyStar={<Entypo name='star-outlined' style={[styles.myEmptyStarStyle]} />}
+            <CustomInput
+                placeholder="Quantity"
+                value={qtde}
+                setValue={setQtde}
             />
 
             <CustomButton text="Register" onPress={onRegisterPressed} />

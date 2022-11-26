@@ -28,11 +28,11 @@ const Donation = connection.define(
                 key: 'id'
             }
         },
-        comment: {
+        itens: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        stars: {
+        qtde: {
             type: Sequelize.INTEGER,
             allowNull: false
         }

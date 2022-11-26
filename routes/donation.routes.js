@@ -11,7 +11,7 @@ donation.get('/', (req, res) => {
 
 donation.post("/register", async (req, res) => {
 
-    const { idUser, idInstitute, comment, stars } = req.body;
+    const { idUser, idInstitute, itens, qtde } = req.body;
 
     const alreadyExistsDonation = await Donation.findOne({ where: { idUser, idInstitute } }).catch(
         (err) => {
@@ -23,7 +23,7 @@ donation.post("/register", async (req, res) => {
         return res.status(409).json({ message: "Donation already registered!" });
     }
 
-    const newDonation = new Donation({ idUser, idInstitute, comment, stars });
+    const newDonation = new Donation({ idUser, idInstitute, itens, qtde });
     const savedDonation = await newDonation.save().catch((err) => {
         console.log("Error: ", err);
         res.status(500).json({ error: "Sorry! Could not register the Donation" });

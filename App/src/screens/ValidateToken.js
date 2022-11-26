@@ -32,7 +32,7 @@ const ValidateToken = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <ActivityIndicator color="red" size={45} />
+            <ActivityIndicator color="blue" size={45} />
         </View>
     )
 }

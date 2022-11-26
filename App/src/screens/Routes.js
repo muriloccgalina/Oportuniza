@@ -1,7 +1,7 @@
 import { StyleSheet, Button } from 'react-native'
 import React, { useContext } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Entypo } from '@expo/vector-icons'
+import { AntDesign, Entypo, FontAwesome5, Ionicons } from '@expo/vector-icons'
 
 import { Context } from '../context/authContext'
 
@@ -15,7 +15,9 @@ const Tab = createBottomTabNavigator();
 const Routes = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
     return (
+        
         <Tab.Navigator screenOptions={{
+            
             headerRight: () => (
                 <Entypo
                     name='log-out'
@@ -31,7 +33,7 @@ const Routes = ({ navigation }) => {
                 component={Home}
                 options={{
                     tabBarIcon: () => (
-                        <Entypo name='home' size={30} />
+                        <AntDesign name='home' size={30} />
                     ),
                 }}
             />
@@ -41,7 +43,7 @@ const Routes = ({ navigation }) => {
                 component={DonationRoutes}
                 options={{
                     tabBarIcon: () => (
-                        <Entypo name='fingerprint' size={30} />
+                        <Ionicons name='md-receipt-outline' size={30} />
                     )
                 }}
             />
@@ -50,7 +52,7 @@ const Routes = ({ navigation }) => {
                 component={InstituteRoutes}
                 options={{
                     tabBarIcon: () => (
-                        <Entypo name='bowl' size={30} />
+                        <FontAwesome5 name='building' size={30} />
                     )
                 }}
             />
@@ -59,7 +61,7 @@ const Routes = ({ navigation }) => {
                     component={Users}
                     options={{
                         tabBarIcon: () => (
-                            <Entypo name='user' size={30} />
+                            <AntDesign name='user' size={30} />
                         )
                     }}
                 />
@@ -70,4 +72,6 @@ const Routes = ({ navigation }) => {
 
 export default Routes
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    
+})

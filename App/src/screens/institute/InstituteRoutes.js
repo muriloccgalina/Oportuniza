@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RegisterInstitute from './RegisterInstitute';
 import Institutes from './Institutes';
 import RegisterDonation from '../donation/RegisterDonation';
-import InstituteDonations from '../donation/RegisterDonation';
+import InstituteDonations from '../donation/InstituteDonations';
 
 const Stack = createNativeStackNavigator();
 

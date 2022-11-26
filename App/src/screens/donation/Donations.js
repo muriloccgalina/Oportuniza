@@ -34,16 +34,8 @@ const InstituteDonations = ({ navigation }) => {
                         <View style={styles.container}>
                             <View style={styles.text}>
                                 <Text style={styles.item}>{item.institute.name}</Text>
-                                <Text style={styles.title}>{item.comment}</Text>
-                                <Stars
-                                    count={5}
-                                    display={item.stars}
-                                    half={false}
-                                    starSize={50}
-                                    fullStar={<Entypo name='star' style={[styles.myStarStyle]} />}
-                                    halfStar={<Entypo name='star' style={[styles.myStarStyle]} />}
-                                    emptyStar={<Entypo name='star-outlined' style={[styles.myEmptyStarStyle]} />}
-                                />
+                                <Text style={styles.title}>{item.itens}</Text>
+                                <Text style={styles.title}>{item.qtde}</Text>
                             </View>
                         </View>
                     )
@@ -90,18 +82,4 @@ const styles = StyleSheet.create({
     icon: {
         margin: 10
     },
-    myStarStyle: {
-        color: 'orange',
-        backgroundColor: 'transparent',
-        textShadowColor: 'black',
-        textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 2,
-        width: 50,
-        fontSize: 50
-    },
-    myEmptyStarStyle: {
-        color: 'gray',
-        width: 50,
-        fontSize: 50
-    }
 })

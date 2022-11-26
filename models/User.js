@@ -24,6 +24,18 @@ const User = connection.define(
             type: Sequelize.STRING,
             allowNull: false
         },
+        email: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                isEmail: true
+            },
+            unique: true
+        },
+        phone: {
+            type: Sequelize.STRING,
+            allowNull: true
+        },
         admin: {
             type: Sequelize.BOOLEAN,
             defaultValue: false,

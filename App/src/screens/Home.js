@@ -1,33 +1,80 @@
-import { View, Text, StyleSheet, Button } from 'react-native'
-import React, { useContext, useState } from 'react'
+import { View, Text, StyleSheet, Button, FlatList } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../context/authContext'
 import CustomButton from '../components/CustomButton';
+import api from '../api';
 
 const Home = ({ navigation }) => {
+  const { state, dispatch } = useContext(Context)
 
-  const { state, dispatch } = useContext(Context);
+  const [donations, setDonations] = useState({});
+
+  useEffect(() => {
+      const onScreenLoad = async () => {
+          const list = await api.get('/home/findAllDonations', {});
+          console.log(list);
+          setDonations(list.data.donations)
+          dispatch({type: "update", payload: false})
+      }
+      onScreenLoad();
+  }, [state.update]
+  )
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Hello, {state.name}</Text>
-      <CustomButton text="Institutes" onPress={() => navigation.navigate("Institutes")} />
-      <CustomButton text="Donations" onPress={() => navigation.navigate("Donations")} />
-      <CustomButton text="Users" onPress={() => navigation.navigate("Users")} />
-    </View>
+      <View style={styles.view}>
+          <FlatList
+              data={donations}
+              renderItem={({ item }) => {
+                  return (
+                      <View style={styles.container}>
+                          <View style={styles.text}>
+                              <Text style={styles.item}>{item.institute.name}</Text>
+                              <Text style={styles.title}>{item.itens}</Text>
+                              <Text style={styles.title}>{item.qtde}</Text>
+                          </View>
+                      </View>
+                  )
+              }
+              }
+              keyExtractor={(item) => item.id}
+          />
+      </View>
+
+
   )
 }
 
 const styles = StyleSheet.create({
+  view: {
+      flex: 1,
+      justifyContent: "center",
+  },
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent:'space-around'
-    
+      flexDirection: "row",
+      flexWrap: "wrap",
+      margin: 5,
+      padding: 10,
+      borderRadius: 10,
+      backgroundColor: 'lightblue',
+      alignItems: 'center'
   },
   text: {
-    fontSize: 30,
-    margin: 40
-  }
+      height: 120,
+      width: '100%',
+      justifyContent: "center",
+  },
+  title: {
+      fontSize: 20,
+      margin: 5,
+      textAlign: 'center'
+  },
+  item: {
+      margin: 5,
+      fontSize: 15
+  },
+  icon: {
+      margin: 10
+  },
 })
 
 export default Home;

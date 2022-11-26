@@ -6,6 +6,7 @@ import CustomButton from "../components/CustomButton";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api';
 import { Context } from '../context/authContext';
+import Maskedinput from "../components/MaskedInput";
 
 const Login = ({ navigation }) => {
     const { dispatch } = useContext(Context);
@@ -41,10 +42,11 @@ const Login = ({ navigation }) => {
                 resizeMode="contain"
             />
 
-            <CustomInput
-                placeholder="CPF"
+            <Maskedinput
+                placeholder={"CPF"}
+                mask={"999.999.999-99"}
                 value={cpf}
-                setValue={setCpf}
+                onChange={setCpf}
             />
 
             <CustomInput

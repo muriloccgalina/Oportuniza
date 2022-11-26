@@ -1,5 +1,8 @@
 import express from "express";
 import Institute from '../models/Institute.js'
+import { cnpj } from 'cpf-cnpj-validator';
+
+const cnpjvalid = cnpj;
 
 const institute = express.Router();
 
@@ -21,13 +24,21 @@ institute.post("/register", async (req, res) => {
         return res.status(409).json({ message: "Institute already registered!" });
     }
 
-    const newRestaurant = new Institute({ name, type, cnpj, address });
-    const savedRestaurant = await newRestaurant.save().catch((err) => {
+    if (!cnpjvalid.isValid(cnpj)) {
+        console.log("Invalid CNPJ");
+        res.json({ message: "CNPJ incorrect"})
+        return res
+            .status(409)
+            .json({ message: "CNPJ incorrect"})
+    }
+
+    const newInstitute = new Institute({ name, type, cnpj, address });
+    const savedInstitute = await newInstitute.save().catch((err) => {
         console.log("Error: ", err);
         res.status(500).json({ error: "Sorry! Could not register the institute" });
     });
 
-    if (savedRestaurant) res.json({ message: "New Institute Registered!" });
+    if (savedInstitute) res.json({ message: "New Institute Registered!" });
 });
 
 institute.get('/find', async (req, res) => {

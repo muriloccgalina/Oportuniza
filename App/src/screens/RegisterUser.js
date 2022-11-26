@@ -5,11 +5,14 @@ import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import api from '../api'
 import {Picker} from '@react-native-picker/picker';
+import Maskedinput from "../components/MaskedInput";
 
 const RegisterUser = ({ navigation }) => {
     const [name, setName] = useState('');
     const [cpf, setCpf] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [admin, setAdmin] = useState(false);
 
     const { height } = useWindowDimensions();
@@ -20,17 +23,25 @@ const RegisterUser = ({ navigation }) => {
                 name: name,
                 cpf: cpf,
                 password: password,
-                admin: admin
+                admin: admin,
+                email: email,
+                phone: phone
             });
             if (data.status === 200) {
                 console.log(data)
                 alert(data.data.message)
                 navigation.navigate('Login')
-            } else {
+            }else {
                 console.log(data)
             }
         } catch (err) {
-            console.log(err);
+            if (err.response.status === 500) {
+                alert(err.response.data.error);
+                console.log(err);
+            } else {
+                console.log(err);
+                alert(err.response.data.message);
+            }
         }
     }
 
@@ -48,17 +59,27 @@ const RegisterUser = ({ navigation }) => {
                 setValue={setName}
             />
 
-            <CustomInput
-                placeholder="CPF"
+            <Maskedinput
+                placeholder={"CPF"}
+                mask={"999.999.999-99"}
                 value={cpf}
-                setValue={setCpf}
+                onChange={setCpf}
             />
-
             <CustomInput
                 placeholder="Password"
                 value={password}
                 setValue={setPassword}
                 secureTextEntry={true}
+            />
+            <CustomInput
+                placeholder="Email"
+                value={email}
+                setValue={setEmail}
+            />
+            <CustomInput
+                placeholder="Phone"
+                value={phone}
+                setValue={setPhone}
             />
 
             <CustomButton text="Register" onPress={onRegisterPressed} />

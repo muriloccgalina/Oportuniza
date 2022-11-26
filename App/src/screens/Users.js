@@ -42,6 +42,15 @@ const Users = ({ navigation }) => {
                                     value={item.cpf}
                                     editable={false}
                                 />
+                                <CustomInput
+                                    value={item.email}
+                                    editable={false}
+                                />
+                                <CustomInput
+                                    placeholder={'Phone'}
+                                    value={item.phone}
+                                    editable={false}
+                                />
                                 
                             </View>
                         </View>
@@ -73,7 +82,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     text: {
-        height: 120,
+        height: '100%',
         width: '100%',
         justifyContent: "center",
     },

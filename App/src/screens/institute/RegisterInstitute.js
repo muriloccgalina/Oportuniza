@@ -6,6 +6,7 @@ import CustomButton from "../../components/CustomButton";
 import api from '../../api'
 import { Context } from '../../context/authContext'
 import {Picker} from '@react-native-picker/picker';
+import Maskedinput from "../../components/MaskedInput";
 
 const RegisterInstitute = ({ navigation }) => {
 
@@ -65,10 +66,11 @@ const RegisterInstitute = ({ navigation }) => {
                 <Picker.Item label="Technology" value="Technology" />
             </Picker>
 
-            <CustomInput
+            <Maskedinput
                 placeholder="CNPJ"
+                mask={"99.999.999/9999-99"}
                 value={cnpj}
-                setValue={setCnpj}
+                onChange={setCnpj}
             />
 
             <CustomInput
