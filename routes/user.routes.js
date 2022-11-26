@@ -46,7 +46,7 @@ user.post('/register', async (req, res) => {
     const newUser = new User({ name, cpf, password, email, phone, admin });
     const savedUser = await newUser.save().catch((err) => {
         console.log("Error: ", err);
-        res.status(500).json({ error: "Unable to register user"});
+        res.status(500).json({ error: "Incorrect data"});
     });
 
     if (savedUser) {

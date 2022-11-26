@@ -7,7 +7,7 @@ const cnpjvalid = cnpj;
 const institute = express.Router();
 
 institute.get('/', (req, res) => {
-    res.send('Rota de Institute');
+    res.send('Institute Routes');
 });
 
 institute.post("/register", async (req, res) => {
@@ -26,7 +26,6 @@ institute.post("/register", async (req, res) => {
 
     if (!cnpjvalid.isValid(cnpj)) {
         console.log("Invalid CNPJ");
-        res.json({ message: "CNPJ incorrect"})
         return res
             .status(409)
             .json({ message: "CNPJ incorrect"})

@@ -39,8 +39,14 @@ const RegisterInstitute = ({ navigation }) => {
                 console.log(authData.data.message)
             }
         }
-        catch (e) {
-            console.log(e)
+        catch (err) {
+            if (err.response.status === 500) {
+                alert(err.response.data.error);
+                console.log(err);
+            } else {
+                console.log(err);
+                alert(err.response.data.message);
+            }
         }
     }
 
