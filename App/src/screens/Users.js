@@ -2,22 +2,24 @@ import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'reac
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../context/authContext'
 import api from '../api'
+import Stars from 'react-native-stars';
 import { Entypo } from "@expo/vector-icons";
+import CustomInput from '../components/CustomInput';
 
 const Users = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
 
-    const [donations, setDonations] = useState({});
+    const [users, setUsers] = useState({});
 
     useEffect(() => {
         const onScreenLoad = async () => {
-            const list = await api.get('/donation/findByInstitute', {
+            const list = await api.get('/user/find', {
                 params: {
-                    idInstitute: state.idInstitute,
+                    idUser: state.idUser,
                   }
             });
             console.log(list);
-            setDonations(list.data.donations)
+            setUsers(list.data.users)
             dispatch({type: "update", payload: false})
         }
         onScreenLoad();
@@ -27,13 +29,29 @@ const Users = ({ navigation }) => {
     return (
         <View style={styles.view}>
             <FlatList
-                data={donations}
+                data={users}
                 renderItem={({ item }) => {
                     return (
                         <View style={styles.container}>
                             <View style={styles.text}>
-                                <Text style={styles.item}>{item.institute.name}</Text>
-                                <Text style={styles.title}>{item.comment}</Text>
+                                <CustomInput
+                                    value={item.name}
+                                    editable={false}
+                                />
+                                <CustomInput
+                                    value={item.cpf}
+                                    editable={false}
+                                />
+                                <CustomInput
+                                    value={item.email}
+                                    editable={false}
+                                />
+                                <CustomInput
+                                    placeholder={'Phone'}
+                                    value={item.phone}
+                                    editable={false}
+                                />
+                                
                             </View>
                         </View>
                     )
@@ -64,7 +82,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     text: {
-        height: 120,
+        height: '100%',
         width: '100%',
         justifyContent: "center",
     },

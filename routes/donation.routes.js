@@ -1,67 +1,75 @@
 import express from "express";
 import Donation from '../models/Donation.js';
+import Institute from '../models/Institute.js';
+import User from "../models/User.js";
 
 const donation = express.Router();
 
 donation.get('/', (req, res) => {
-    res.send('Donations routes');
+    res.send('Donation Routes');
 });
 
 donation.post("/register", async (req, res) => {
 
-    const { idUser, idInstitute, comment, qtde, dateDonation } = req.body;
+    const { idUser, idInstitute, itens, qtde } = req.body;
 
-    const alreadyExistsdonation = await donation.findOne({ where: { idUser, idInstitute } }).catch(
+    const alreadyExistsDonation = await Donation.findOne({ where: { idUser, idInstitute } }).catch(
         (err) => {
             console.log("Error: ", err);
         }
     );
 
-    if (alreadyExistsdonation) {
-        return res.status(409).json({ message: "donation already registered!" });
+    if (alreadyExistsDonation) {
+        return res.status(409).json({ message: "Donation already registered!" });
     }
 
-    const newdonation = new donation({ idUser, idInstitute, comment, qtde, dateDonation });
-    const saveddonation = await newdonation.save().catch((err) => {
+    const newDonation = new Donation({ idUser, idInstitute, itens, qtde });
+    const savedDonation = await newDonation.save().catch((err) => {
         console.log("Error: ", err);
-        res.status(500).json({ error: "Sorry! Could not register the donation" });
+        res.status(500).json({ error: "Sorry! Could not register the Donation" });
     });
 
-    if (saveddonation) res.json({ message: "New donation Registered!" });
+    if (savedDonation) res.json({ message: "New Donation Registered!" });
 });
 
 donation.get('/findByInstitute', async (req, res) => {
-    const idInstitute = req.body.idInstitute;
-    const donations = await donation.findAll(
-        {where: {idInstitute}}
-    ).catch(
+    const idInstitute = req.query.idInstitute;
+    const donations = await Donation.findAll({
+        where: {
+            idInstitute: idInstitute
+        },
+        include: [{model: User}]
+    }).catch(
         (err) => {
             console.log(err)
         }
     );
 
-    if (donations){
-        return res.json({donations})
+    if (donations) {
+        return res.json({ donations })
     } else {
         return null
     }
 })
 
 donation.get('/findByUser', async (req, res) => {
-    const idUser = req.body.idUser;
-    const donations = await donation.findAll(
-        {where: {idUser}}
-    ).catch(
+    const idUser = req.query.idUser;
+    const donations = await Donation.findAll({
+        where: {
+            idUser: idUser
+        },
+        include: [{model: Institute}]
+    }).catch(
         (err) => {
             console.log(err)
         }
     );
 
-    if (donations){
-        return res.json({donations})
+    if (donations) {
+        return res.json({ donations })
     } else {
         return null
     }
 })
 
-export default donation;
+export default donation;  

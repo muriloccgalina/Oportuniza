@@ -13,10 +13,12 @@
     "url": "git+https://github.com/muriloccgalina/oportuniza.git"
   },
   "keywords": [
-    "eletronics",
+    "review",
+    "restaurant",
+    "food",
     "app"
   ],
-  "author": "Murilo",
+  "author": "Eduardo Rahal",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/muriloccgalina/oportuniza/issues"
@@ -26,11 +28,15 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
+    "cpf-cnpj-validator": "^1.0.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^3.0.0-rc.1",
+    "react-maskedinput": "^4.0.1",
+    "react-native-mask": "^0.5.0",
     "sequelize": "^6.21.3",
+    "sharp-cli": "^3.0.0",
     "url": "^0.11.0"
   },
   "devDependencies": {

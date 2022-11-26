@@ -1,15 +1,18 @@
 import express from "express";
 import Institute from '../models/Institute.js'
+import { cnpj } from 'cpf-cnpj-validator';
+
+const cnpjvalid = cnpj;
 
 const institute = express.Router();
 
 institute.get('/', (req, res) => {
-    res.send('Institute routes');
+    res.send('Rota de Institute');
 });
 
 institute.post("/register", async (req, res) => {
     
-    const { name, type, cpnj, address } = req.body;
+    const { name, type, cnpj, address } = req.body;
 
     const alreadyExistsInstitute = await Institute.findOne({ where: { name } }).catch(
         (err) => {
@@ -21,27 +24,35 @@ institute.post("/register", async (req, res) => {
         return res.status(409).json({ message: "Institute already registered!" });
     }
 
-    const newInstitute = new Institute({ name, type, cpnj, address });
+    if (!cnpjvalid.isValid(cnpj)) {
+        console.log("Invalid CNPJ");
+        res.json({ message: "CNPJ incorrect"})
+        return res
+            .status(409)
+            .json({ message: "CNPJ incorrect"})
+    }
+
+    const newInstitute = new Institute({ name, type, cnpj, address });
     const savedInstitute = await newInstitute.save().catch((err) => {
         console.log("Error: ", err);
-        res.status(500).json({ error: "Sorry! Could not register the Institute" });
+        res.status(500).json({ error: "Sorry! Could not register the institute" });
     });
 
     if (savedInstitute) res.json({ message: "New Institute Registered!" });
 });
 
 institute.get('/find', async (req, res) => {
-    const Institutes = await Institute.findAll().catch(
+    const institutes = await Institute.findAll().catch(
         (err) => {
             console.log(err)
         }
     );
 
-    if (Institutes){
-        return res.json({Institutes})
+    if (institutes){
+        return res.json({institutes})
     } else {
         return null
     }
 })
 
-export default Institute;
+export default institute;

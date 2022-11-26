@@ -1,6 +1,6 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import RegisterDonations from './RegisterDonations';
+import RegisterDonation from './RegisterDonation';
 import Donations from './Donations';
 
 const Stack = createNativeStackNavigator();
@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator();
 const DonationRoutes = ({ navigation }) => {
     return (
             <Stack.Navigator screenOptions={{ headerShown: false }} >
-                <Stack.Screen name="DonationsMain" component={Donations} />
+                <Stack.Screen name="DonationMain" component={Donations} />
             </Stack.Navigator>
     )
 }

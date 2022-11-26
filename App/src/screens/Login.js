@@ -3,10 +3,10 @@ import React, { useState, useContext } from 'react';
 import Logo from '../../assets/images/Logo.png';
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
-import Maskedinput from "../components/Maskedinput";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api';
 import { Context } from '../context/authContext';
+import Maskedinput from "../components/MaskedInput";
 
 const Login = ({ navigation }) => {
     const { dispatch } = useContext(Context);
@@ -23,11 +23,11 @@ const Login = ({ navigation }) => {
                 await AsyncStorage.setItem('token', authData.data.token)
                 dispatch({type:'logIn', payload: true})
             } else {
-                alert('Invalid email or password')
+                alert('Email ou Senha Inválidos')
                 setPassword('')
             }
         } catch (error) {
-            alert('Invalid email or password')
+            alert('Email ou Senha Inválidos')
             setPassword('')
         }
     }
@@ -42,12 +42,11 @@ const Login = ({ navigation }) => {
                 resizeMode="contain"
             />
 
-            <Maskedinput 
-
-            placeholder={"CPF"}
-            mask={"999.999.999-99"}
-            value={cpf}
-            onChange={setCpf}
+            <Maskedinput
+                placeholder={"CPF"}
+                mask={"999.999.999-99"}
+                value={cpf}
+                onChange={setCpf}
             />
 
             <CustomInput
@@ -63,9 +62,9 @@ const Login = ({ navigation }) => {
                 onPress={() => navigation.navigate("RegisterUser")}
             >
                 <Text>
-                    Não tem uma conta?{" "}
+                    Don't have an account?{" "}
                     <Text style={styles.createAccountText}>
-                        Crie uma
+                        Sign up
                     </Text>
                 </Text>
             </TouchableOpacity>

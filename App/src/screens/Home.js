@@ -1,35 +1,80 @@
-import { View, Text, StyleSheet, Button } from 'react-native'
-import React, { useContext, useState } from 'react'
+import { View, Text, StyleSheet, Button, FlatList } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../context/authContext'
+import CustomButton from '../components/CustomButton';
+import api from '../api';
 
-const Home = () => {
-  const [counter, setCounter] = useState(0);
-  const { dispatch } = useContext(Context);
+const Home = ({ navigation }) => {
+  const { state, dispatch } = useContext(Context)
+
+  const [donations, setDonations] = useState({});
+
+  useEffect(() => {
+      const onScreenLoad = async () => {
+          const list = await api.get('/home/findAllDonations', {});
+          console.log(list);
+          setDonations(list.data.donations)
+          dispatch({type: "update", payload: false})
+      }
+      onScreenLoad();
+  }, [state.update]
+  )
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Home</Text>
-      <Text> {counter} </Text>
-      <Button 
-        title='Aumentar' 
-        onPress={() => setCounter(counter + 1)}
-      />
-      <Button 
-        title='Logout' 
-        onPress={() => dispatch({ type: 'logOut' })}
-      />
-    </View>
+      <View style={styles.view}>
+          <FlatList
+              data={donations}
+              renderItem={({ item }) => {
+                  return (
+                      <View style={styles.container}>
+                          <View style={styles.text}>
+                              <Text style={styles.item}>{item.institute.name}</Text>
+                              <Text style={styles.title}>{item.itens}</Text>
+                              <Text style={styles.title}>{item.qtde}</Text>
+                          </View>
+                      </View>
+                  )
+              }
+              }
+              keyExtractor={(item) => item.id}
+          />
+      </View>
+
+
   )
 }
 
 const styles = StyleSheet.create({
+  view: {
+      flex: 1,
+      justifyContent: "center",
+  },
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      margin: 5,
+      padding: 10,
+      borderRadius: 10,
+      backgroundColor: 'lightblue',
+      alignItems: 'center'
   },
   text: {
-    fontSize: 30
-  }
+      height: 120,
+      width: '100%',
+      justifyContent: "center",
+  },
+  title: {
+      fontSize: 20,
+      margin: 5,
+      textAlign: 'center'
+  },
+  item: {
+      margin: 5,
+      fontSize: 15
+  },
+  icon: {
+      margin: 10
+  },
 })
 
 export default Home;

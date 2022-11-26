@@ -1,15 +1,19 @@
-import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity, Picker } from "react-native";
+import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native";
 import React, { useState } from 'react';
 import Logo from '../../assets/images/Logo.png';
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import api from '../api'
-import Maskedinput from "../components/Maskedinput";
+import {Picker} from '@react-native-picker/picker';
+import Maskedinput from "../components/MaskedInput";
 
 const RegisterUser = ({ navigation }) => {
     const [name, setName] = useState('');
     const [cpf, setCpf] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [admin, setAdmin] = useState(false);
 
     const { height } = useWindowDimensions();
 
@@ -18,17 +22,26 @@ const RegisterUser = ({ navigation }) => {
             const data = await api.post('/user/register', {
                 name: name,
                 cpf: cpf,
-                password: password
+                password: password,
+                admin: admin,
+                email: email,
+                phone: phone
             });
             if (data.status === 200) {
                 console.log(data)
                 alert(data.data.message)
                 navigation.navigate('Login')
-            } else {
+            }else {
                 console.log(data)
             }
         } catch (err) {
-            console.log(err);
+            if (err.response.status === 500) {
+                alert(err.response.data.error);
+                console.log(err);
+            } else {
+                console.log(err);
+                alert(err.response.data.message);
+            }
         }
     }
 
@@ -39,38 +52,43 @@ const RegisterUser = ({ navigation }) => {
                 style={[styles.logo, { height: height * 0.3 }]}
                 resizeMode="contain"
             />
-            
+
             <CustomInput
-              
-                placeholder="The owner name"
+                placeholder="Name"
                 value={name}
                 setValue={setName}
             />
 
-            <Maskedinput 
-
+            <Maskedinput
                 placeholder={"CPF"}
                 mask={"999.999.999-99"}
                 value={cpf}
                 onChange={setCpf}
             />
-
             <CustomInput
-
                 placeholder="Password"
                 value={password}
                 setValue={setPassword}
                 secureTextEntry={true}
             />
-   
+            <CustomInput
+                placeholder="Email"
+                value={email}
+                setValue={setEmail}
+            />
+            <CustomInput
+                placeholder="Phone"
+                value={phone}
+                setValue={setPhone}
+            />
 
             <CustomButton text="Register" onPress={onRegisterPressed} />
             <TouchableOpacity
                 onPress={() => navigation.navigate("Login")}
             >
                 <Text>
-                    Já tem uma conta?{" "}
-                    <Text style={styles.loginText}>Faça o login</Text>
+                   Already have an account?{" "}
+                    <Text style={styles.loginText}>Sign in</Text>
                 </Text>
             </TouchableOpacity>
         </View>
@@ -90,9 +108,6 @@ const styles = StyleSheet.create({
     loginText: {
         fontWeight: "bold",
         color: "#6200ee",
-    },
-    Maskedinput:{
-        
     },
     picker: {
         marginVertical: 5,

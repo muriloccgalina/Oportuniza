@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import connection from '../config/db.js';
 import Institute from './Institute.js';
-import User from '../models/User.js';
+import User from './User.js';
 
 const Donation = connection.define(
     'donation',
@@ -28,17 +28,13 @@ const Donation = connection.define(
                 key: 'id'
             }
         },
-        comment: {
+        itens: {
             type: Sequelize.STRING,
             allowNull: false
         },
         qtde: {
             type: Sequelize.INTEGER,
             allowNull: false
-        },
-        dateDonation: {
-            type: Sequelize.DATE,
-            allowNull: false,
         }
     }
 );
@@ -46,7 +42,7 @@ const Donation = connection.define(
 Donation.belongsTo(Institute, {
     foreignKey: 'idInstitute'
   });
-Donation.belongsTo(User, {
+  Donation.belongsTo(User, {
     foreignKey: 'idUser'
   });
 

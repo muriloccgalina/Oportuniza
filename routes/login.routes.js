@@ -47,7 +47,7 @@ login.post('/', async (req, res) => {
 
     // Envia confirmação e Token para Usuário
     res.json({
-        message: "Bem-vindo!",
+        message: "Welcome!",
         token: token
     })
 

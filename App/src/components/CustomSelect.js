@@ -9,8 +9,8 @@ const CustomSelect = ({ value, setValue, options }) => {
                 style={styles.input}
                 onValueChange={setValue}
             >
-                <Picker.Item label="Empresa" value="true" />
-                <Picker.Item label="Sede" value="false" />
+                <Picker.Item label="Admin User" value="true" />
+                <Picker.Item label="Regular User" value="false" />
             </Picker>
         </View>
     )
