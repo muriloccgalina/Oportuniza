@@ -9,6 +9,7 @@ const DonationRoutes = ({ navigation }) => {
     return (
             <Stack.Navigator screenOptions={{ headerShown: false }} >
                 <Stack.Screen name="DonationMain" component={Donations} />
+                <Stack.Screen name="RegisterDonation" component={RegisterDonation} />
             </Stack.Navigator>
     )
 }

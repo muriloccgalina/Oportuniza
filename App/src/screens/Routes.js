@@ -1,7 +1,7 @@
 import { StyleSheet, Button } from 'react-native'
 import React, { useContext } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { AntDesign, Entypo, FontAwesome5, Ionicons } from '@expo/vector-icons'
+import { AntDesign, FontAwesome5, Ionicons } from '@expo/vector-icons'
 
 import { Context } from '../context/authContext'
 
@@ -19,8 +19,8 @@ const Routes = ({ navigation }) => {
         <Tab.Navigator screenOptions={{
             
             headerRight: () => (
-                <Entypo
-                    name='log-out'
+                <AntDesign
+                    name='back'
                     size={20}
                     style={{ margin: 10 }}
                     onPress={() => dispatch({ type: 'logOut' })}
@@ -33,7 +33,7 @@ const Routes = ({ navigation }) => {
                 component={Home}
                 options={{
                     tabBarIcon: () => (
-                        <AntDesign name='home' size={30} />
+                        <AntDesign name='home' size={21} />
                     ),
                 }}
             />
@@ -43,7 +43,7 @@ const Routes = ({ navigation }) => {
                 component={DonationRoutes}
                 options={{
                     tabBarIcon: () => (
-                        <Ionicons name='md-receipt-outline' size={30} />
+                        <Ionicons name='md-receipt-outline' size={21} />
                     )
                 }}
             />
@@ -52,7 +52,7 @@ const Routes = ({ navigation }) => {
                 component={InstituteRoutes}
                 options={{
                     tabBarIcon: () => (
-                        <FontAwesome5 name='building' size={30} />
+                        <FontAwesome5 name='building' size={21} />
                     )
                 }}
             />
@@ -61,7 +61,7 @@ const Routes = ({ navigation }) => {
                     component={Users}
                     options={{
                         tabBarIcon: () => (
-                            <AntDesign name='user' size={30} />
+                            <AntDesign name='user' size={21} />
                         )
                     }}
                 />

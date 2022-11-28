@@ -32,6 +32,7 @@ const RegisterDonation = ({ navigation }) => {
                 setItens("")
                 setQtde("")
                 dispatch({type: "update", payload: true})
+                navigation.navigate('DonationMain')
             }
             else {
                 console.log(authData.data.message)
@@ -43,13 +44,14 @@ const RegisterDonation = ({ navigation }) => {
     }
 
     return (
-        <View style={styles.view}>
+        <View style={styles.container}>
+            
             <Image
                 source={Logo}
                 style={[styles.logo, { height: height * 0.3 }]}
                 resizeMode="contain"
             />
-
+            <View style={styles.content}>
             <CustomInput
                 value={state.nameInstitute}
                 editable={false}
@@ -70,16 +72,24 @@ const RegisterDonation = ({ navigation }) => {
                 value={qtde}
                 setValue={setQtde}
             />
-
+            </View>
             <CustomButton text="Register" onPress={onRegisterPressed} />
+        
         </View>
     )
 };
 
 const styles = StyleSheet.create({
-    view: {
+    container: {
         alignItems: 'center',
         padding: 20,
+        backgroundColor: 'lightblue',
+        height:'100%'
+    },
+    content:{
+        marginBottom: 20,
+        width:'100%',
+        alignItems:'center'
     },
     logo: {
         width: '70%',
@@ -90,20 +100,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#6200ee",
     },
-    myStarStyle: {
-        color: 'orange',
-        backgroundColor: 'transparent',
-        textShadowColor: 'black',
-        textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 2,
-        width: 50,
-        fontSize: 50
-    },
-    myEmptyStarStyle: {
-        color: 'gray',
-        width: 50,
-        fontSize: 50
-    }
 });
 
 export default RegisterDonation

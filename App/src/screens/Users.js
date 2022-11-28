@@ -2,9 +2,9 @@ import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'reac
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../context/authContext'
 import api from '../api'
-import Stars from 'react-native-stars';
-import { Entypo } from "@expo/vector-icons";
+import { ImageBackground } from 'react-native';
 import CustomInput from '../components/CustomInput';
+import userImage from '../../assets/images/userimage.png'
 
 const Users = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
@@ -27,13 +27,12 @@ const Users = ({ navigation }) => {
     )
 
     return (
-        <View style={styles.view}>
+        <View style={styles.container}>
             <FlatList
                 data={users}
                 renderItem={({ item }) => {
                     return (
-                        <View style={styles.container}>
-                            <View style={styles.text}>
+                            <View style={styles.content}>
                                 <CustomInput
                                     value={item.name}
                                     editable={false}
@@ -51,14 +50,15 @@ const Users = ({ navigation }) => {
                                     value={item.phone}
                                     editable={false}
                                 />
-                                
                             </View>
-                        </View>
                     )
                 }
                 }
                 keyExtractor={(item) => item.id}
             />
+            <ImageBackground
+            source={userImage}
+            style={styles.imagem} />
         </View>
 
 
@@ -68,48 +68,25 @@ const Users = ({ navigation }) => {
 export default Users
 
 const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-        justifyContent: "center",
-    },
+    
     container: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-        margin: 5,
-        padding: 10,
-        borderRadius: 10,
         backgroundColor: 'lightblue',
-        alignItems: 'center'
+        alignItems:'center',
+        justifyContent: 'space-between',
+        backgroundColor: '#F0F8FF',
+        width: '100%',
+        height: '100%',
     },
-    text: {
+    content: {
+        marginTop: 20,
         height: '100%',
         width: '100%',
         justifyContent: "center",
     },
-    title: {
-        fontSize: 20,
-        margin: 5,
-        textAlign: 'center'
+    imagem:{
+        maxHeight:'90%',
+        minHeight:'60%',
+        width: '100%',
+        marginBottom:'-20%',
     },
-    item: {
-        margin: 5,
-        fontSize: 15
-    },
-    icon: {
-        margin: 10
-    },
-    myStarStyle: {
-        color: 'orange',
-        backgroundColor: 'transparent',
-        textShadowColor: 'black',
-        textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 2,
-        width: 50,
-        fontSize: 50
-    },
-    myEmptyStarStyle: {
-        color: 'gray',
-        width: 50,
-        fontSize: 50
-    }
 })

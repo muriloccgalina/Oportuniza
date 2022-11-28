@@ -2,8 +2,7 @@ import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'reac
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../../context/authContext'
 import api from '../../api'
-import Stars from 'react-native-stars';
-import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const InstituteDonations = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
@@ -15,27 +14,36 @@ const InstituteDonations = ({ navigation }) => {
             const list = await api.get('/donation/findByUser', {
                 params: {
                     idUser: state.idUser,
-                  }
+                }
             });
             console.log(list);
             setDonations(list.data.donations)
-            dispatch({type: "update", payload: false})
+            dispatch({ type: "update", payload: false })
         }
         onScreenLoad();
     }, [state.update]
     )
 
     return (
-        <View style={styles.view}>
+        <View style={styles.container}>
             <FlatList
                 data={donations}
                 renderItem={({ item }) => {
                     return (
-                        <View style={styles.container}>
-                            <View style={styles.text}>
+                        <View style={styles.content}>
+                            {/* 
                                 <Text style={styles.item}>{item.institute.name}</Text>
                                 <Text style={styles.title}>{item.itens}</Text>
                                 <Text style={styles.title}>{item.qtde}</Text>
+
+                             */}
+                            <View style={styles.header}>
+                                <Text style={styles.nameInstitute}>{item.institute.name}</Text>
+                                <Text style={styles.title}>{item.itens}</Text>
+                                <Text style={styles.title}>{item.qtde}</Text>
+                            </View>
+                            <View style={styles.footer}>
+                                <AntDesign name='smileo' size={30} style={styles.emoji} />
                             </View>
                         </View>
                     )
@@ -52,34 +60,42 @@ const InstituteDonations = ({ navigation }) => {
 export default InstituteDonations
 
 const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-        justifyContent: "center",
-    },
     container: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-        margin: 5,
-        padding: 10,
-        borderRadius: 10,
-        backgroundColor: 'lightblue',
-        alignItems: 'center'
-    },
-    text: {
-        height: 120,
-        width: '100%',
+        flex: 1,
+        padding: 13,
         justifyContent: "center",
+        backgroundColor: '#F0F8FF',
+    },
+    content: {
+        borderBottomWidth: 6,
+        borderBottomColor: '#000',
+        flexWrap: "wrap",
+        paddingLeft: 13,
+        paddingTop: 8,
+        borderRadius: 10,
+        height: 130,
+        width: '100%',
+        backgroundColor: '#6495ED',
+    },
+    header: {
+        minWidth: '85%'
+    },
+    footer: {
+        width: '10%'
     },
     title: {
-        fontSize: 20,
+        fontSize: 23,
+        fontWeight: 'bold',
+        fontFamily: 'FreeMono, monospace',
+        color: '#fff',
         margin: 5,
-        textAlign: 'center'
     },
-    item: {
+    nameInstitute: {
+
+        fontWeight: 'bold',
+        color: '#fff',
         margin: 5,
         fontSize: 15
     },
-    icon: {
-        margin: 10
-    },
+
 })

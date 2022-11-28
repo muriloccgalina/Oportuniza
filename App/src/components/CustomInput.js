@@ -11,6 +11,7 @@ const CustomInput = ({ value, setValue, placeholder, secureTextEntry, editable }
                 style={styles.input}
                 secureTextEntry={secureTextEntry}
                 editable={editable}
+                
             />
         </View>
     )
@@ -18,15 +19,17 @@ const CustomInput = ({ value, setValue, placeholder, secureTextEntry, editable }
  
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'lightgray',
+        backgroundColor: '#dcdcdc',
         width: '100%',
         marginVertical: 5,
-        borderWidth: 1,
-        borderColor: '#e8e8e8',
+        borderRightWidth: 4,
+        borderBottomWidth:4,
+        borderColor: '#000',
+        borderStyle: 'solid',
         borderRadius: 5,
     },
     input: {
-        padding: 15,
+        padding: 13,
         fontWeight: 'bold',
     }
 })

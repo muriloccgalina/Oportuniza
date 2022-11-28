@@ -20,16 +20,18 @@ const Maskedinput = ({ placeholder, mask, value, onChange}) => {
 
 const styles = StyleSheet.create({
   container: {
-      backgroundColor: 'lightgray',
-      width: '100%',
-      marginVertical: 5,
-      borderWidth: 1,
-      borderColor: 'lightgray',//'#e8e8e8',
-      borderRadius: 5,
+        backgroundColor: '#DCDCDC',
+        width: '100%',
+        marginVertical: 5,
+        borderRightWidth: 4,
+        borderBottomWidth:4,
+        borderColor: '#000',
+        borderStyle: 'solid',
+        borderRadius: 5,
   },
   input: {
-      padding: 15,
-      backgroundColor: 'lightgray',
+      padding: 13,
+      backgroundColor: '#DCDCDC',
       fontWeight: 'bold',
   }
 })

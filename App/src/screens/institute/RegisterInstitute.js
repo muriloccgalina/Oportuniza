@@ -34,6 +34,7 @@ const RegisterInstitute = ({ navigation }) => {
                 setCnpj("")
                 setAddress("")
                 dispatch({type: "update", payload: true})
+                navigation.navigate('MainInstitutes')
             }
             else {
                 console.log(authData.data.message)

@@ -18,13 +18,13 @@ const CustomSelect = ({ value, setValue, options }) => {
  
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'lightgray',
+        backgroundColor: 'dcdcdc',
         width: '100%',
         marginVertical: 5,
         borderRadius: 5,
     },
     input: {
-        backgroundColor: 'lightgray',
+        backgroundColor: 'dcdcdc',
         textAlignVertical: 'center',
         textAlign: 'center',
         fontSize: '14px',
