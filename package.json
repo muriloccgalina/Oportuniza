@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GabrielCarvalhouo/SA-oportuniza.git"
+    "url": "git+https://github.com/muriloccgalina/oportuniza.git"
   },
   "keywords": [
     "review",
@@ -18,12 +18,12 @@
     "food",
     "app"
   ],
-  "author": "Eduardo Rahal",
+  "author": "murilocgalina",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/GabrielCarvalhouo/SA-oportuniza.gitissues"
+    "url": "https://github.com/muriloccgalina/oportuniza.gitissues"
   },
-  "homepage": "https://github.com/GabrielCarvalhouo/SA-oportuniza.git#readme",
+  "homepage": "https://github.com/muriloccgalina/oportuniza.git#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
