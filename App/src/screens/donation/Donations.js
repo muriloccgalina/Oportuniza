@@ -16,8 +16,13 @@ const InstituteDonations = ({ navigation }) => {
                     idUser: state.idUser,
                 }
             });
-            console.log(list);
+            if (list.data.donations[0] != null) {
+            console.log(list.data.donations)
             setDonations(list.data.donations)
+            } else {
+                console.log('aa')
+                navigation.navigate('EmptyDonations')
+            }
             dispatch({ type: "update", payload: false })
         }
         onScreenLoad();
