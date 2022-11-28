@@ -18,7 +18,6 @@ const Users = ({ navigation }) => {
                     idUser: state.idUser,
                   }
             });
-            console.log(list);
             setUsers(list.data.users)
             dispatch({type: "update", payload: false})
         }

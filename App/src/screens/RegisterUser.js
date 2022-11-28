@@ -28,7 +28,6 @@ const RegisterUser = ({ navigation }) => {
                 phone: phone
             });
             if (data.status === 200) {
-                console.log(data)
                 alert(data.data.message)
                 navigation.navigate('Login')
             }else {
@@ -99,6 +98,7 @@ const styles = StyleSheet.create({
     view: {
         alignItems: 'center',
         padding: 20,
+        backgroundColor: '#F0F8FF',
     },
     logo: {
         width: '70%',

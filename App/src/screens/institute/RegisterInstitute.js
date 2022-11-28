@@ -95,6 +95,8 @@ const styles = StyleSheet.create({
     view: {
         alignItems: 'center',
         padding: 20,
+        backgroundColor: '#F0F8FF',
+        height:'100%'
     },
     logo: {
         width: '70%',
@@ -108,6 +110,9 @@ const styles = StyleSheet.create({
     picker: {
         marginVertical: 5,
         borderRadius: 5,
+        borderRightWidth: 4,
+        borderBottomWidth: 4,
+        borderColor: '#000',
         backgroundColor: 'lightgray',
         textAlignVertical: 'center',
         textAlign: 'center',

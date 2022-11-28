@@ -16,15 +16,17 @@ export default EmptyDonations;
 
 const styles = StyleSheet.create({
     content: {
-        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign:'center',
         padding: 20,
-        backgroundColor: 'lightblue',
-        height:'100%'
+        backgroundColor: '#F0F8FF',
+        height:'100%',
+        width:"100%"
     },
     text: {
         fontWeight: 'bold',
         color: 'black',
-        fontSize: 30,
+        fontSize: 24,
         alignItems: 'center'
     },
 

@@ -12,7 +12,6 @@ const Home = ({ navigation }) => {
     useEffect(() => {
         const onScreenLoad = async () => {
             const list = await api.get('/home/findAllDonations', {});
-            console.log(list);
             setDonations(list.data.donations)
             dispatch({ type: "update", payload: false })
         }
@@ -22,13 +21,12 @@ const Home = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            
             <FlatList
                 data={donations}
                 renderItem={({ item }) => {
                     return (
                         <View style={styles.content}>
-                            <View style={styles.header}>
+                            <View style={styles.middle}>
                                 <Text style={styles.nameInstitute}>{item.institute.name}</Text>
                                 <Text style={styles.title}>{item.itens}</Text>
                                 <Text style={styles.title}>{item.qtde}</Text>
@@ -68,7 +66,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#6495ED',
         marginBottom: 10
     },
-    header:{
+    middle:{
         minWidth:'85%'
     },
     footer:{

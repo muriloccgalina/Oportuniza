@@ -19,15 +19,15 @@ const Login = ({ navigation }) => {
                 cpf: cpf,
                 password: password
             })
-            if(authData.status === 200){
+            if (authData.status === 200) {
                 await AsyncStorage.setItem('token', authData.data.token)
-                dispatch({type:'logIn', payload: true})
+                dispatch({ type: 'logIn', payload: true })
             } else {
-                alert('Email ou Senha Inválidos')
+                alert('CPF or password incorrect!')
                 setPassword('')
             }
         } catch (error) {
-            alert('Email ou Senha Inválidos')
+            alert('CPF or password incorrect!')
             setPassword('')
         }
     }
@@ -35,55 +35,68 @@ const Login = ({ navigation }) => {
     const { height } = useWindowDimensions();
 
     return (
-        <View style={styles.view}>
-            <Image
-                source={Logo}
-                style={[styles.logo, { height: height * 0.3 }]}
-                resizeMode="contain"
-            />
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <Image
+                    source={Logo}
+                    style={[styles.logo, { height: height * 0.3 }]}
+                    resizeMode="contain"
+                />
+            </View>
+            <View style={styles.content}>
+                <Maskedinput
+                    placeholder={"CPF"}
+                    mask={"999.999.999-99"}
+                    value={cpf}
+                    onChange={setCpf}
+                />
 
-            <Maskedinput
-                placeholder={"CPF"}
-                mask={"999.999.999-99"}
-                value={cpf}
-                onChange={setCpf}
-            />
+                <CustomInput
+                    placeholder="Password"
+                    value={password}
+                    setValue={setPassword}
+                    secureTextEntry={true}
+                />
 
-            <CustomInput
-                placeholder="Password"
-                value={password}
-                setValue={setPassword}
-                secureTextEntry={true}
-            />
+                <CustomButton text="Login" onPress={onLoginPressed} />
 
-            <CustomButton text="Login" onPress={onLoginPressed} />
-
-            <TouchableOpacity
-                onPress={() => navigation.navigate("RegisterUser")}
-            >
-                <Text>
-                    Don't have an account?{" "}
-                    <Text style={styles.createAccountText}>
-                        Sign up
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("RegisterUser")}
+                >
+                    <Text>
+                        Don't have an account?{" "}
+                        <Text style={styles.createAccountText}>
+                            Sign up
+                        </Text>
                     </Text>
-                </Text>
-            </TouchableOpacity>
-
+                </TouchableOpacity>
+            </View>
         </View>
     )
 };
 
 const styles = StyleSheet.create({
-    view: {
+    container: {
         alignItems: 'center',
+        justifyContent: 'center',
         padding: 20,
-        backgroundColor: 'lightblue',
-        height:'100%'
+        backgroundColor: '#F0F8FF',
+        height: '100%'
+    },
+    header:{ 
+        width:'70%',
+        height: '35%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    content:{
+        width:'100%',
+        height: '60%',
+        alignItems: 'center',
+        justifyContent:'start'
     },
     logo: {
-        width: '70%',
-        maxWidth: 300,
-        maxHeight: 200,
+        width: '100%',
     },
     createAccountText: {
         fontWeight: "bold",

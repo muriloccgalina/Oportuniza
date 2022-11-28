@@ -20,8 +20,8 @@ const Routes = ({ navigation }) => {
             
             headerRight: () => (
                 <AntDesign
-                    name='back'
-                    size={20}
+                    name='logout'
+                    size={22}
                     style={{ margin: 10 }}
                     onPress={() => dispatch({ type: 'logOut' })}
                     color="#000"

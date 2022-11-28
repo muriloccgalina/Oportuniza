@@ -17,10 +17,8 @@ const InstituteDonations = ({ navigation }) => {
                 }
             });
             if (list.data.donations[0] != null) {
-            console.log(list.data.donations)
             setDonations(list.data.donations)
             } else {
-                console.log('aa')
                 navigation.navigate('EmptyDonations')
             }
             dispatch({ type: "update", payload: false })
@@ -35,6 +33,7 @@ const InstituteDonations = ({ navigation }) => {
                 data={donations}
                 renderItem={({ item }) => {
                     return (
+                        
                         <View style={styles.content}>
                             {/* 
                                 <Text style={styles.item}>{item.institute.name}</Text>
@@ -71,6 +70,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         backgroundColor: '#F0F8FF',
     },
+    textTop:{
+        height: 20,
+    },
     content: {
         borderBottomWidth: 6,
         borderBottomColor: '#000',
@@ -83,6 +85,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#6495ED',
     },
     header: {
+
         minWidth: '85%'
     },
     footer: {

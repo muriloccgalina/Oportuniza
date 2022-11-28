@@ -24,13 +24,13 @@ const InstituteDonations = ({ navigation }) => {
     )
 
     return (
-        <View style={styles.view}>
+        <View style={styles.container}>
             <FlatList
                 data={donations}
                 renderItem={({ item }) => {
                     return (
-                        <View style={styles.container}>
-                            <View style={styles.text}>
+                        <View style={styles.content}>
+                            <View style={styles.middle}>
                                 <Text style={styles.title}>Itens: {item.itens}</Text>
                                 <Text style={styles.title}>Quantity:{item.qtde}</Text>
                                 <Text style={styles.title}>Doado por: {item.user.name}</Text>
@@ -50,28 +50,36 @@ const InstituteDonations = ({ navigation }) => {
 export default InstituteDonations
 
 const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-        justifyContent: "center",
-    },
     container: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-        margin: 5,
-        padding: 10,
-        borderRadius: 10,
-        backgroundColor: 'lightblue',
-        alignItems: 'center'
+        flex: 1,
+        padding: 13,
+        justifyContent: "center",
+        
+        backgroundColor: '#F0F8FF',
     },
-    text: {
+    content: {
+        borderBottomWidth: 6,
+        borderBottomColor: '#000',
+        marginBottom:'3%',
+        flexWrap: "wrap",
+        paddingLeft: 13,
+        paddingTop: 8,
+        borderRadius: 10,
+        height: 130,
+        width: '100%',
+        backgroundColor: '#6495ED',
+    },
+    middle: {
         height: '100%',
         width: '100%',
         justifyContent: "center",
     },
     title: {
-        fontSize: 30,
-        margin: 10,
-        textAlign: 'center'
+        fontSize: 18,
+        fontWeight: 'bold',
+        fontFamily: 'FreeMono, monospace',
+        color: '#fff',
+        margin: 5,
     },
     item: {
         margin: 10,
